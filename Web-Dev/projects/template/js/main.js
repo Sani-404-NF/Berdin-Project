@@ -1,110 +1,302 @@
-document.addEventListener('DOMContentLoaded', function () {
-    var menuToggle = document.querySelector('.menu-toggle');
-    var nav = document.querySelector('nav');
+(function () {
+    'use strict';
 
-    if (menuToggle && nav) {
+    var reduceMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+
+    function qs(selector, scope) {
+        return (scope || document).querySelector(selector);
+    }
+
+    function qsa(selector, scope) {
+        return Array.prototype.slice.call((scope || document).querySelectorAll(selector));
+    }
+
+    /* ---------- Toast ---------- */
+
+    var toast = qs('[data-toast]');
+    var toastTimer;
+
+    function showToast(message, isError) {
+        if (!toast) return;
+        toast.textContent = message;
+        toast.classList.toggle('is-error', Boolean(isError));
+        toast.classList.add('is-visible');
+        clearTimeout(toastTimer);
+        toastTimer = setTimeout(function () {
+            toast.classList.remove('is-visible');
+        }, 3200);
+    }
+
+    /* ---------- Mobile navigation ---------- */
+
+    var menuToggle = qs('[data-menu-toggle]');
+    var navPanel = qs('[data-nav-panel]');
+    var header = qs('[data-header]');
+
+    function setMenu(open) {
+        if (!menuToggle || !navPanel) return;
+        navPanel.classList.toggle('is-open', open);
+        menuToggle.setAttribute('aria-expanded', String(open));
+        menuToggle.setAttribute('aria-label', open ? 'Close navigation menu' : 'Open navigation menu');
+    }
+
+    if (menuToggle && navPanel) {
         menuToggle.addEventListener('click', function () {
-            nav.classList.toggle('open');
+            var open = menuToggle.getAttribute('aria-expanded') === 'true';
+            setMenu(!open);
+            if (!open) {
+                var firstLink = qs('.nav-link', navPanel);
+                if (firstLink) firstLink.focus();
+            } else {
+                menuToggle.focus();
+            }
+        });
+
+        qsa('.nav-link, .nav-cta', navPanel).forEach(function (link) {
+            link.addEventListener('click', function () {
+                setMenu(false);
+            });
+        });
+
+        document.addEventListener('click', function (event) {
+            if (!navPanel.contains(event.target) && !menuToggle.contains(event.target)) {
+                setMenu(false);
+            }
+        });
+
+        document.addEventListener('keydown', function (event) {
+            if (event.key === 'Escape' && menuToggle.getAttribute('aria-expanded') === 'true') {
+                setMenu(false);
+                menuToggle.focus();
+            }
+        });
+
+        window.addEventListener('resize', function () {
+            if (window.innerWidth > 820) setMenu(false);
         });
     }
 
-    var form = document.getElementById('contact-form');
-    if (form) {
-        form.addEventListener('submit', function (e) {
-            e.preventDefault();
-            var valid = true;
+    /* ---------- Scroll progress, sticky header, back-to-top ---------- */
 
-            var nameInput = document.getElementById('name');
-            var nameError = document.querySelector('[data-error="name"]');
-            if (nameInput && nameError) {
-                if (!nameInput.value.trim()) {
-                    nameError.textContent = 'Name is required.';
-                    valid = false;
-                } else {
-                    nameError.textContent = '';
-                }
-            }
+    var progressBar = qs('[data-scroll-progress] span');
+    var floatToTop = qs('.to-top-float');
+    var ticking = false;
 
-            var emailInput = document.getElementById('email');
-            var emailError = document.querySelector('[data-error="email"]');
-            if (emailInput && emailError) {
-                var emailPattern = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
-                if (!emailInput.value.trim()) {
-                    emailError.textContent = 'Email is required.';
-                    valid = false;
-                } else if (!emailPattern.test(emailInput.value.trim())) {
-                    emailError.textContent = 'Please enter a valid email address.';
-                    valid = false;
-                } else {
-                    emailError.textContent = '';
-                }
-            }
+    function onScroll() {
+        var scrollTop = window.scrollY || document.documentElement.scrollTop;
+        var scrollable = document.documentElement.scrollHeight - window.innerHeight;
 
-            var messageInput = document.getElementById('message');
-            var messageError = document.querySelector('[data-error="message"]');
-            if (messageInput && messageError) {
-                if (!messageInput.value.trim()) {
-                    messageError.textContent = 'Message is required.';
-                    valid = false;
-                } else {
-                    messageError.textContent = '';
-                }
-            }
+        if (progressBar) {
+            progressBar.style.width = (scrollable > 0 ? (scrollTop / scrollable) * 100 : 0) + '%';
+        }
 
-            if (valid) {
-                showToast('Message sent!');
-                form.reset();
-            }
-        });
+        if (header) {
+            header.classList.toggle('is-stuck', scrollTop > 8);
+        }
+
+        if (floatToTop) {
+            floatToTop.hidden = scrollTop < 600;
+        }
+
+        ticking = false;
     }
 
-    var sections = document.querySelectorAll('section[id]');
-    var navLinks = document.querySelectorAll('.nav-link');
+    window.addEventListener('scroll', function () {
+        if (ticking) return;
+        ticking = true;
+        window.requestAnimationFrame(onScroll);
+    }, { passive: true });
 
-    if (sections.length > 0 && navLinks.length > 0 && 'IntersectionObserver' in window) {
-        var observer = new IntersectionObserver(function (entries) {
+    onScroll();
+
+    qsa('[data-to-top]').forEach(function (button) {
+        button.addEventListener('click', function () {
+            window.scrollTo({ top: 0, behavior: reduceMotion ? 'auto' : 'smooth' });
+            var logoLink = qs('.nav-logo-link');
+            if (logoLink) logoLink.focus({ preventScroll: true });
+        });
+    });
+
+    /* ---------- Reveal on scroll ---------- */
+
+    var revealTargets = qsa('.reveal');
+
+    if (!('IntersectionObserver' in window) || reduceMotion) {
+        revealTargets.forEach(function (el) { el.classList.add('is-visible'); });
+    } else {
+        var revealObserver = new IntersectionObserver(function (entries) {
             entries.forEach(function (entry) {
                 if (entry.isIntersecting) {
-                    var id = entry.target.getAttribute('id');
-                    navLinks.forEach(function (link) {
-                        link.style.fontWeight = '';
-                        if (link.getAttribute('href') === '#' + id) {
-                            link.style.fontWeight = 'bold';
-                        }
-                    });
+                    entry.target.classList.add('is-visible');
+                    revealObserver.unobserve(entry.target);
                 }
             });
-        }, { rootMargin: '-50% 0px -50% 0px' });
+        }, { rootMargin: '0px 0px -12% 0px', threshold: 0.08 });
 
-        sections.forEach(function (section) {
-            observer.observe(section);
+        revealTargets.forEach(function (el) { revealObserver.observe(el); });
+    }
+
+    /* ---------- Active section highlighting ---------- */
+
+    var sections = qsa('section[id]');
+    var navLinks = qsa('.nav-link');
+
+    function setActiveLink(id) {
+        navLinks.forEach(function (link) {
+            if (link.getAttribute('href') === '#' + id) {
+                link.setAttribute('aria-current', 'true');
+            } else {
+                link.removeAttribute('aria-current');
+            }
         });
     }
 
-    function showToast(message) {
-        var toast = document.createElement('div');
-        toast.textContent = message;
-        toast.style.position = 'fixed';
-        toast.style.bottom = '24px';
-        toast.style.right = '24px';
-        toast.style.backgroundColor = '#1e293b';
-        toast.style.color = 'white';
-        toast.style.padding = '12px 24px';
-        toast.style.borderRadius = '8px';
-        toast.style.zIndex = '1000';
-        toast.style.opacity = '0';
-        toast.style.transition = 'opacity 0.3s ease';
-        document.body.appendChild(toast);
+    if (sections.length && navLinks.length && 'IntersectionObserver' in window) {
+        var sectionObserver = new IntersectionObserver(function (entries) {
+            entries.forEach(function (entry) {
+                if (entry.isIntersecting) {
+                    setActiveLink(entry.target.id);
+                }
+            });
+        }, { rootMargin: '-45% 0px -50% 0px' });
 
-        requestAnimationFrame(function () {
-            toast.style.opacity = '1';
+        sections.forEach(function (section) { sectionObserver.observe(section); });
+    }
+
+    /* ---------- Project filters ---------- */
+
+    var filterButtons = qsa('.filter-btn');
+    var projectCards = qsa('.project-card');
+    var emptyState = qs('[data-empty-state]');
+
+    filterButtons.forEach(function (button) {
+        button.addEventListener('click', function () {
+            var filter = button.getAttribute('data-filter');
+
+            filterButtons.forEach(function (other) {
+                var isActive = other === button;
+                other.classList.toggle('is-active', isActive);
+                other.setAttribute('aria-pressed', String(isActive));
+            });
+
+            var visible = 0;
+            projectCards.forEach(function (card) {
+                var matches = filter === 'all' || card.getAttribute('data-category') === filter;
+                card.hidden = !matches;
+                if (matches) visible++;
+            });
+
+            if (emptyState) emptyState.hidden = visible !== 0;
+        });
+    });
+
+    /* ---------- Contact form ---------- */
+
+    var form = qs('#contact-form');
+
+    if (form) {
+        var validators = {
+            name: function (value) {
+                if (!value.trim()) return 'Name is required.';
+                if (value.trim().length < 2) return 'Please enter at least 2 characters.';
+                return '';
+            },
+            email: function (value) {
+                if (!value.trim()) return 'Email is required.';
+                if (!/^[^\s@]+@[^\s@]+\.[^\s@]{2,}$/.test(value.trim())) {
+                    return 'Please enter a valid email address.';
+                }
+                return '';
+            },
+            message: function (value) {
+                if (!value.trim()) return 'Message is required.';
+                if (value.trim().length < 10) return 'Please write a little more (10+ characters).';
+                return '';
+            }
+        };
+
+        function validateField(field) {
+            var input = qs('#' + field);
+            var error = qs('[data-error="' + field + '"]');
+            if (!input) return true;
+
+            var message = validators[field](input.value);
+            if (error) error.textContent = message;
+            input.setAttribute('aria-invalid', message ? 'true' : 'false');
+            return !message;
+        }
+
+        Object.keys(validators).forEach(function (field) {
+            var input = qs('#' + field);
+            if (!input) return;
+            input.addEventListener('blur', function () { validateField(field); });
+            input.addEventListener('input', function () {
+                if (input.getAttribute('aria-invalid') === 'true') validateField(field);
+            });
         });
 
-        setTimeout(function () {
-            toast.style.opacity = '0';
-            setTimeout(function () {
-                document.body.removeChild(toast);
-            }, 300);
-        }, 3000);
+        form.addEventListener('submit', function (event) {
+            event.preventDefault();
+
+            var fields = Object.keys(validators);
+            var firstInvalid = null;
+
+            fields.forEach(function (field) {
+                if (!validateField(field) && !firstInvalid) {
+                    firstInvalid = qs('#' + field);
+                }
+            });
+
+            if (firstInvalid) {
+                showToast('Please fix the highlighted fields.', true);
+                firstInvalid.focus();
+                return;
+            }
+
+            form.reset();
+            fields.forEach(function (field) {
+                var input = qs('#' + field);
+                if (input) input.setAttribute('aria-invalid', 'false');
+            });
+            showToast('Thanks! Your message is ready to send.');
+        });
     }
-});
+
+    /* ---------- Small enhancements ---------- */
+
+    var copyButton = qs('[data-copy-email]');
+
+    if (copyButton) {
+        copyButton.addEventListener('click', function () {
+            var email = copyButton.getAttribute('data-email') || '';
+            var hint = qs('.copy-email-hint', copyButton);
+
+            function done() {
+                if (hint) hint.textContent = 'Copied';
+                showToast('Email address copied to clipboard.');
+                setTimeout(function () {
+                    if (hint) hint.textContent = 'Copy';
+                }, 2000);
+            }
+
+            if (navigator.clipboard && navigator.clipboard.writeText) {
+                navigator.clipboard.writeText(email).then(done, function () {
+                    showToast('Copy failed - please select the email manually.', true);
+                });
+            } else {
+                showToast('Copy not supported here - the address is above.', true);
+            }
+        });
+    }
+
+    qsa('[data-coming-soon]').forEach(function (link) {
+        link.addEventListener('click', function (event) {
+            event.preventDefault();
+            showToast('This link is coming soon - stay tuned!');
+        });
+    });
+
+    qsa('[data-year]').forEach(function (el) {
+        el.textContent = String(new Date().getFullYear());
+    });
+})();

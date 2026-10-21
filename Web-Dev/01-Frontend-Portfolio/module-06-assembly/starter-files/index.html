@@ -3,71 +3,349 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>My Portfolio</title>
-    <link rel="stylesheet" href="css/style.css">
+    <title>Sonny Jr. Berdin | Web &amp; Game Developer</title>
+    <meta name="description" content="Portfolio of Sonny Jr. Berdin, a BSIT student and aspiring full-stack web and game developer building practical, user-friendly applications.">
+    <meta name="theme-color" content="#0b0b0d">
+    <meta name="color-scheme" content="dark">
+
+    <meta property="og:type" content="website">
+    <meta property="og:title" content="Sonny Jr. Berdin | Web &amp; Game Developer">
+    <meta property="og:description" content="Portfolio of Sonny Jr. Berdin, a BSIT student and aspiring full-stack web and game developer.">
+    <meta property="og:image" content="../img/thumbnail_proj.png">
+
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@500;700&family=Inter:wght@400;600&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="style.css">
+    <script>document.documentElement.classList.add('js');</script>
+    <script type="application/ld+json">
+    {
+      "@context": "https://schema.org",
+      "@type": "Person",
+      "name": "Sonny Jr. Berdin",
+      "jobTitle": "Web and Game Developer",
+      "url": ""
+    }
+    </script>
 </head>
 <body>
-    <header>
-        <nav>
-            <a href="#" class="logo">Your Name</a>
-            <a href="#about" class="nav-link">About</a>
-            <a href="#projects" class="nav-link">Projects</a>
-            <a href="#contact" class="nav-link">Contact</a>
-            <button class="menu-toggle" aria-label="Toggle navigation">☰</button>
+    <a class="skip-link" href="#main-content">Skip to content</a>
+    <div class="scroll-progress" data-scroll-progress aria-hidden="true"><span></span></div>
+
+    <header class="site-header" data-header>
+        <nav class="nav" aria-label="Primary">
+            <a href="#hero" class="nav-logo-link" aria-label="Sonny Jr. Berdin, back to top">
+                <img src="../img/logo.png" alt="" class="nav-logo" width="56" height="56" fetchpriority="high">
+                <span class="nav-wordmark">My <span>Portfolio</span></span>
+            </a>
+
+            <div class="nav-links" id="nav-links" data-nav-panel>
+                <a href="#about" class="nav-link">About</a>
+                <a href="#skills" class="nav-link">Skills</a>
+                <a href="#projects" class="nav-link">Projects</a>
+                <a href="#contact" class="nav-link">Contact</a>
+                <a href="#contact" class="btn btn-sm nav-cta">Let's Talk</a>
+            </div>
+
+            <button class="menu-toggle" type="button" data-menu-toggle
+                    aria-label="Open navigation menu" aria-expanded="false" aria-controls="nav-links">
+                <span class="menu-toggle-icon" aria-hidden="true"></span>
+            </button>
         </nav>
     </header>
-    <main>
-        <section id="hero">
-            <h1>Your Name</h1>
-            <p>Web Developer</p>
-            <a href="#projects" class="btn">View My Work</a>
+
+    <main id="main-content">
+        <section id="hero" class="hero">
+            <div class="hero-inner">
+                <div class="photo-frame">
+                    <img src="../img/sani.jpg" alt="Portrait of Sonny Jr. Berdin" class="about-photo" width="260" height="260" fetchpriority="high">
+                </div>
+
+                <p class="badge">
+                    <span class="badge-dot" aria-hidden="true"></span>
+                    Open to internships &amp; collaborations
+                </p>
+
+                <h1>Sonny Jr.&nbsp;Berdin</h1>
+                <p class="hero-role">Aspiring Full-Stack <span>Web</span> &amp; <span>Game</span> Developer</p>
+                <p class="hero-lede">
+                    I build practical, user-friendly applications &mdash; from accessible web interfaces
+                    to multiplayer game systems. Currently a BSIT student learning fast and shipping often.
+                </p>
+
+                <div class="hero-actions">
+                    <a href="#projects" class="btn">View My Work</a>
+                    <a href="#contact" class="btn btn-ghost">Get in Touch</a>
+                </div>
+
+                <ul class="hero-chips" aria-label="Core technologies">
+                    <li>HTML</li>
+                    <li>CSS</li>
+                    <li>JavaScript</li>
+                    <li>React</li>
+                    <li>Lua</li>
+                    <li>Java</li>
+                </ul>
+            </div>
         </section>
-        <section id="about">
-            <h2>About Me</h2>
-            <p>Write a short bio about yourself, your skills, and your interests.</p>
+
+        <section id="about" class="section reveal">
+            <div class="section-head">
+                <h2>About Me</h2>
+                <p class="section-sub">A quick look at who I am and how I work.</p>
+            </div>
+
+            <div class="about-grid">
+                <p class="about-lead">
+                    I'm Sonny Jr. Berdin, a Bachelor of Science in Information Technology student
+                    passionate about software and web development. I enjoy learning new technologies
+                    and applying them to build things people can actually use.
+                </p>
+
+                <div class="about-detail">
+                    <h3>What I bring</h3>
+                    <ul class="check-list">
+                        <li>Academic and personal projects spanning web, mobile, and game development.</li>
+                        <li>Hands-on experience with HTML, CSS, JavaScript, Lua, Java, and React.</li>
+                        <li>A focus on clean UI, accessible interactions, and user-friendly design.</li>
+                        <li>Comfortable documenting APIs, testing endpoints, and working in a team.</li>
+                    </ul>
+                </div>
+            </div>
+
+            <ul class="stat-row">
+                <li class="stat">
+                    <span class="stat-value">Web &amp; Mobile</span>
+                    <span class="stat-label">Frontend focus</span>
+                </li>
+                <li class="stat">
+                    <span class="stat-value">Roblox Studio</span>
+                    <span class="stat-label">Game development</span>
+                </li>
+                <li class="stat">
+                    <span class="stat-value">Fast Learner</span>
+                    <span class="stat-label">Self-taught &amp; coursework</span>
+                </li>
+                <li class="stat">
+                    <span class="stat-value">Team Player</span>
+                    <span class="stat-label">Collaboration first</span>
+                </li>
+            </ul>
+
+            <p class="about-goal">
+                As I continue to grow in the IT field, my goal is to become a professional web and game
+                developer and create technology that provides meaningful solutions to real-world problems.
+            </p>
         </section>
-        <section id="projects">
-            <h2>Projects</h2>
-            <div class="project-grid">
-                <article class="project-card">
-                    <h3>Project One</h3>
-                    <p>Short description of what this project does and the technologies used.</p>
+
+        <section id="skills" class="section reveal">
+            <div class="section-head">
+                <h2>Skills &amp; Tools</h2>
+                <p class="section-sub">Technologies I use to design, build, and ship.</p>
+            </div>
+
+            <div class="skills-grid">
+                <article class="skill-card">
+                    <h3>Frontend</h3>
+                    <ul class="tag-list">
+                        <li>HTML5</li>
+                        <li>CSS3</li>
+                        <li>JavaScript (ES6+)</li>
+                        <li>React</li>
+                    </ul>
                 </article>
-                <article class="project-card">
-                    <h3>Project Two</h3>
-                    <p>Short description of what this project does and the technologies used.</p>
+                <article class="skill-card">
+                    <h3>Backend &amp; Data</h3>
+                    <ul class="tag-list">
+                        <li>REST APIs</li>
+                        <li>Supabase</li>
+                        <li>Databases</li>
+                        <li>Authentication</li>
+                    </ul>
                 </article>
-                <article class="project-card">
-                    <h3>Project Three</h3>
-                    <p>Short description of what this project does and the technologies used.</p>
+                <article class="skill-card">
+                    <h3>Mobile</h3>
+                    <ul class="tag-list">
+                        <li>Flutter</li>
+                        <li>Dart</li>
+                    </ul>
+                </article>
+                <article class="skill-card">
+                    <h3>Game Dev</h3>
+                    <ul class="tag-list">
+                        <li>Roblox Studio</li>
+                        <li>Lua / Luau</li>
+                    </ul>
+                </article>
+                <article class="skill-card">
+                    <h3>Tools &amp; Workflow</h3>
+                    <ul class="tag-list">
+                        <li>Git &amp; GitHub</li>
+                        <li>Postman</li>
+                        <li>VS Code</li>
+                        <li>Vercel</li>
+                    </ul>
                 </article>
             </div>
         </section>
-        <section id="contact">
-            <h2>Contact</h2>
-            <form id="contact-form">
-                <div class="form-group">
-                    <label for="name">Name</label>
-                    <input type="text" id="name" name="name" required>
-                    <span class="error-message" data-error="name"></span>
-                </div>
-                <div class="form-group">
-                    <label for="email">Email</label>
-                    <input type="email" id="email" name="email" required>
-                    <span class="error-message" data-error="email"></span>
-                </div>
-                <div class="form-group">
-                    <label for="message">Message</label>
-                    <textarea id="message" name="message" rows="5" required></textarea>
-                    <span class="error-message" data-error="message"></span>
-                </div>
-                <button type="submit" class="btn">Send Message</button>
-            </form>
+
+        <section id="projects" class="section reveal">
+            <div class="section-head">
+                <h2>Projects</h2>
+            </div>
+
+            <div class="project-filters" role="group" aria-label="Filter projects by category">
+                <button class="filter-btn is-active" type="button" data-filter="all" aria-pressed="true">All</button>
+                <button class="filter-btn" type="button" data-filter="game" aria-pressed="false">Game</button>
+                <button class="filter-btn" type="button" data-filter="web" aria-pressed="false">Web</button>
+            </div>
+
+            <div class="project-grid" data-project-grid>
+                <article class="project-card" data-category="game">
+                    <div class="carousel" data-carousel>
+                        <div class="carousel-track" data-carousel-track role="group" aria-roledescription="carousel" aria-label="Sleepover Panic screenshots" tabindex="0">
+                            <img src="../img/thumbnail_proj.png" alt="Sleepover Panic thumbnail artwork" loading="lazy" decoding="async" width="640" height="360">
+                            <img src="../img/project_1.png" alt="Sleepover Panic gameplay screenshot 1" loading="lazy" decoding="async" width="640" height="360">
+                            <img src="../img/project_1.2.png" alt="Sleepover Panic gameplay screenshot 2" loading="lazy" decoding="async" width="640" height="360">
+                            <img src="../img/project_1.3.png" alt="Sleepover Panic gameplay screenshot 3" loading="lazy" decoding="async" width="640" height="360">
+                            <img src="../img/project_1.4.png" alt="Sleepover Panic gameplay screenshot 4" loading="lazy" decoding="async" width="640" height="360">
+                        </div>
+                        <button class="carousel-btn prev" type="button" aria-label="Previous screenshot">&#10094;</button>
+                        <button class="carousel-btn next" type="button" aria-label="Next screenshot">&#10095;</button>
+                        <p class="carousel-status" data-carousel-status aria-live="polite">1 / 5</p>
+                    </div>
+
+                    <div class="project-body">
+                        <div class="project-title-row">
+                            <h3>Sleepover Panic</h3>
+                            <span class="project-year">Roblox</span>
+                        </div>
+
+                        <p class="project-desc">
+                            A multiplayer horror survival game in Roblox Studio where players work together to
+                            survive a mysterious night of dangerous events and challenging objectives. It blends
+                            exploration, teamwork, puzzle-solving, and suspense into an immersive horror experience.
+                        </p>
+
+                        <ul class="tag-list tag-list-sm" aria-label="Sleepover Panic technologies">
+                            <li>Lua / Luau</li>
+                            <li>Roblox Studio</li>
+                            <li>UI Design</li>
+                        </ul>
+
+                        <div class="project-links">
+                            <a class="btn btn-sm btn-ghost" href="#" data-coming-soon>Play / Live Demo</a>
+                            <a class="btn btn-sm btn-ghost" href="#" data-coming-soon>Source Code</a>
+                        </div>
+                    </div>
+                </article>
+            </div>
+
+            <p class="empty-state" data-empty-state role="status" hidden>
+                Nothing in this category yet &mdash; check back soon!
+            </p>
+        </section>
+
+        <section id="contact" class="section reveal">
+            <div class="section-head">
+                <h2>Contact</h2>
+                <p class="section-sub">Got a project, an internship, or just a question? I'd love to hear from you.</p>
+            </div>
+
+            <div class="contact-container">
+                <form id="contact-form" class="contact-form" novalidate>
+                    <div class="form-group">
+                        <label for="name">Name</label>
+                        <input type="text" id="name" name="name" autocomplete="name" required
+                               aria-describedby="name-error">
+                        <span class="error-message" id="name-error" data-error="name"></span>
+                    </div>
+
+                    <div class="form-group">
+                        <label for="email">Email</label>
+                        <input type="email" id="email" name="email" autocomplete="email" required
+                               aria-describedby="email-error">
+                        <span class="error-message" id="email-error" data-error="email"></span>
+                    </div>
+
+                    <div class="form-group">
+                        <label for="message">Message</label>
+                        <textarea id="message" name="message" rows="5" required aria-describedby="message-error"></textarea>
+                        <span class="error-message" id="message-error" data-error="message"></span>
+                    </div>
+
+                    <button type="submit" class="btn">Send Message</button>
+                </form>
+
+                <aside class="contact-info">
+                    <img src="../img/logo.png" alt="" class="contact-logo" width="170" height="170" loading="lazy">
+                    <h3>Let's Connect!</h3>
+                    <p>Reach out on social media, or drop an email and I'll get back to you soon.</p>
+
+                    <button class="copy-email" type="button" data-copy-email data-email="berdinjrsonny@gmail.com">
+                        <span>berdinjrsonny@gmail.com</span>
+                        <span class="copy-email-hint" aria-hidden="true">Copy</span>
+                    </button>
+
+                    <ul class="social-links">
+                        <li>
+                            <a href="https://www.facebook.com/sonny.berdin.52" target="_blank" rel="noopener noreferrer">
+                                <img src="../img/facebook.png" alt="" width="42" height="42" loading="lazy">
+                                <span class="sr-only">Facebook (opens in a new tab)</span>
+                            </a>
+                        </li>
+                        <li>
+                            <a href="https://www.instagram.com/snnys.wrld" target="_blank" rel="noopener noreferrer">
+                                <img src="../img/instagram.png" alt="" width="42" height="42" loading="lazy">
+                                <span class="sr-only">Instagram (opens in a new tab)</span>
+                            </a>
+                        </li>
+                        <li>
+                            <a href="https://www.linkedin.com/in/sonny-berdin-jr-a9716b422/" target="_blank" rel="noopener noreferrer">
+                                <img src="../img/linkedin.png" alt="" width="42" height="42" loading="lazy">
+                                <span class="sr-only">LinkedIn (opens in a new tab)</span>
+                            </a>
+                        </li>
+                    </ul>
+                </aside>
+            </div>
         </section>
     </main>
-    <footer>
-        <p>&copy; 2026 Your Name</p>
+
+    <footer class="site-footer">
+        <div class="footer-inner">
+            <div class="footer-brand">
+                <img src="../img/logo.png" alt="" class="footer-logo" width="56" height="56" loading="lazy">
+                <p>Sonny Jr. Berdin &mdash; Web &amp; Game Developer</p>
+            </div>
+
+            <nav class="footer-nav" aria-label="Footer">
+                <a href="#about">About</a>
+                <a href="#skills">Skills</a>
+                <a href="#projects">Projects</a>
+                <a href="#contact">Contact</a>
+            </nav>
+
+            <button class="to-top" type="button" data-to-top>
+                Back to top <span aria-hidden="true">&uarr;</span>
+            </button>
+        </div>
+
+        <p class="footer-legal">&copy; <span data-year>2026</span> Sonny Jr. Berdin. All rights reserved.</p>
     </footer>
-    <script src="js/main.js"></script>
+
+    <button class="to-top to-top-float" type="button" data-to-top aria-label="Back to top" hidden>&uarr;</button>
+
+    <div class="fullview-overlay" data-lightbox role="dialog" aria-modal="true" aria-label="Screenshot viewer" hidden>
+        <button class="overlay-close" type="button" data-lightbox-close aria-label="Close screenshot viewer">&times;</button>
+        <button class="overlay-btn prev" type="button" data-lightbox-prev aria-label="Previous screenshot">&#10094;</button>
+        <img data-lightbox-img src="" alt="">
+        <button class="overlay-btn next" type="button" data-lightbox-next aria-label="Next screenshot">&#10095;</button>
+        <p class="lightbox-status" data-lightbox-status aria-live="polite"></p>
+    </div>
+
+    <div class="toast" data-toast role="status" aria-live="polite" aria-atomic="true"></div>
+
+    <script src="main.js"></script>
 </body>
 </html>

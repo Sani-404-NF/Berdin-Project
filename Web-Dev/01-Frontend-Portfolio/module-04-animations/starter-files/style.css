@@ -17,3 +17,131 @@
         transition: none !important;
     }
 }
+
+.photo-frame {
+    transition: transform 0.4s cubic-bezier(0.25, 0.8, 0.25, 1),
+                box-shadow 0.4s cubic-bezier(0.25, 0.8, 0.25, 1);
+}
+
+.btn {
+    transition: background-color 0.3s cubic-bezier(0.25, 0.8, 0.25, 1),
+                transform 0.3s cubic-bezier(0.25, 0.8, 0.25, 1);
+}
+
+.btn:hover {
+    background-color: var(--color-accent);
+    transform: scale(1.05);
+    text-decoration: none;
+}
+
+.btn:active {
+    transform: scale(0.97);
+    transition-duration: 0.1s;
+}
+
+.project-card {
+    transition: transform 0.35s cubic-bezier(0.25, 0.8, 0.25, 1),
+                box-shadow 0.35s cubic-bezier(0.25, 0.8, 0.25, 1);
+}
+
+.project-card:hover {
+    transform: translateY(-4px);
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+}
+
+nav .nav-link {
+    position: relative;
+    transition: color 0.25s ease;
+}
+
+nav .nav-link:hover {
+    color: var(--color-primary);
+}
+
+nav .nav-link::after {
+    content: "";
+    position: absolute;
+    left: 0;
+    bottom: -4px;
+    width: 0%;
+    height: 2px;
+    background-color: var(--color-primary);
+    transition: width 0.3s cubic-bezier(0.25, 0.8, 0.25, 1);
+}
+
+nav .nav-link:hover::after {
+    width: 100%;
+}
+
+.carousel-btn {
+    transition: background-color 0.2s ease, transform 0.2s ease;
+}
+
+.carousel-btn:hover {
+    background-color: var(--color-primary);
+    transform: translateY(-50%) scale(1.1);
+}
+
+.social-links img {
+    transition: transform 0.3s ease;
+}
+
+.social-links img:hover {
+    transform: scale(1.15);
+}
+
+.fullview-overlay {
+    opacity: 0;
+    transition: opacity 0.3s ease, visibility 0.3s ease;
+}
+
+.fullview-overlay.active {
+    opacity: 1;
+    visibility: visible;
+}
+
+.fullview-overlay img {
+    transform: scale(0.9);
+    transition: transform 0.3s ease;
+}
+
+.fullview-overlay.active img {
+    transform: scale(1);
+}
+
+.overlay-close,
+.overlay-btn {
+    transition: background-color 0.2s ease, transform 0.2s ease, color 0.2s ease;
+}
+
+.overlay-close:hover {
+    color: var(--color-primary);
+    transform: scale(1.15);
+}
+
+.overlay-btn:hover {
+    background-color: var(--color-primary);
+    transform: translateY(-50%) scale(1.1);
+}
+
+section {
+    animation: fadeInUp 0.7s cubic-bezier(0.16, 1, 0.3, 1) both;
+}
+
+section:nth-of-type(1) { animation-delay: 0.1s; }
+section:nth-of-type(2) { animation-delay: 0.25s; }
+section:nth-of-type(3) { animation-delay: 0.4s; }
+
+@keyframes titlePulse {
+    0%, 100% {
+        transform: scale(1);
+    }
+    50% {
+        transform: scale(1.03);
+    }
+}
+
+#hero h1 {
+    display: inline-block;
+    animation: titlePulse 3.5s ease-in-out infinite;
+}

@@ -3,17 +3,126 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Portfolio Starter</title>
+    <meta name="description" content="Portfolio of Sonny Jr. Berdin, a BSIT student and aspiring full-stack web developer.">
+    <title>My Portfolio</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@500;700&family=Inter:wght@400;600&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="../../module-02-css/starter-files/style.css">
+    <link rel="stylesheet" href="../../module-04-animations/starter-files/style.css">
+    <script type="application/ld+json">
+    {
+      "@context": "https://schema.org",
+      "@type": "Person",
+      "name": "Sonny Jr. Berdin",
+      "jobTitle": "Web and Game Developer",
+      "url": ""
+    }
+    </script>
 </head>
 <body>
+    <a class="skip-link" href="#main-content">Skip to content</a>
     <header>
-        <nav></nav>
+      <nav>
+    <a href="#hero" class="nav-logo-link" aria-label="Back to top">
+        <img src="../img/logo.png" alt="CroakDev logo" class="nav-logo">
+    </a>
+    <div class="nav-links">
+        <a href="#about" class="nav-link">About</a>
+        <a href="#projects" class="nav-link">Projects</a>
+        <a href="#contact" class="nav-link">Contact</a>
+    </div>
+    <button class="menu-toggle" aria-label="Toggle navigation">☰</button>
+</nav>
     </header>
-    <main>
-        <section id="about"></section>
-        <section id="projects"></section>
-        <section id="contact"></section>
+    <main id="main-content">
+        <section id="hero">
+            <div class="photo-frame">
+                <img src="../img/sani.jpg" alt="Portrait of Sonny Jr. Berdin" class="about-photo">
+            </div>
+            <h1>Sonny Jr. Berdin</h1>
+            <p>Aspiring Full-Stack Web and Game Developer</p>
+            <a href="#projects" class="btn">View My Work</a>
+        </section>
+
+        <section id="about">
+            <h2>About Me</h2>
+            <p>Hello! I'm Sonny Jr. Berdin, a Bachelor of Science in Information Technology (BSIT) student who is passionate about software and web development. I enjoy learning new technologies and applying them to build practical and user-friendly applications. Throughout my studies, I have gained experience using HTML, CSS, JavaScript, Lua, Java, and React while working on academic projects that strengthened my programming and problem-solving skills. I am a hardworking, adaptable, and fast learner who values continuous improvement and teamwork. As I continue to grow in the IT field, my goal is to become a professional web and game developer and create technology that provides meaningful solutions to real-world problems.</p>
+        </section>
+
+        <section id="projects">
+            <h2>Projects</h2>
+            <div class="project-filters">
+                <button class="filter-btn active" data-filter="all">All</button>
+                <button class="filter-btn" data-filter="game">Game</button>
+                <button class="filter-btn" data-filter="web">Web</button>
+            </div>
+            <div class="project-grid">
+                <article class="project-card" data-category="game">
+                    <h3>Sleepover Panic</h3>
+                    <div class="carousel">
+                        <div class="carousel-track">
+                            <img src="../img/thumbnail_proj.png" alt="Sleepover Panic thumbnail screenshot 1">
+                            <img src="../img/project_1.png" alt="Sleepover Panic gameplay screenshot 2">
+                            <img src="../img/project_1.2.png" alt="Sleepover Panic gameplay screenshot 3">
+                            <img src="../img/project_1.3.png" alt="Sleepover Panic gameplay screenshot 4">
+                            <img src="../img/project_1.4.png" alt="Sleepover Panic gameplay screenshot 5">
+                        </div>
+                        <button class="carousel-btn prev" aria-label="Previous image">&#10094;</button>
+                        <button class="carousel-btn next" aria-label="Next image">&#10095;</button>
+                    </div>
+                    <p>Sleepover Panic is a multiplayer horror survival game developed in Roblox Studio where players must work together to survive a mysterious night filled with dangerous events and challenging objectives. The game combines exploration, teamwork, puzzle-solving, and suspense to create an immersive horror experience. Throughout development, I focused on gameplay mechanics, scripting, user interface design, and creating an engaging atmosphere.</p>
+                </article>
+                <p class="empty-state" data-empty-state>Nothing to see here yet — I'll update this section as soon as I create one!</p>
+            </div>
+        </section>
+
+        <section id="contact">
+            <h2>Contact</h2>
+            <div class="contact-container">
+                <form id="contact-form">
+                    <div class="form-group">
+                        <label for="name">Name</label>
+                        <input type="text" id="name" name="name" required>
+                        <span class="error-message" data-error="name"></span>
+                    </div>
+                    <div class="form-group">
+                        <label for="email">Email</label>
+                        <input type="email" id="email" name="email" required>
+                        <span class="error-message" data-error="email"></span>
+                    </div>
+                    <div class="form-group">
+                        <label for="message">Message</label>
+                        <textarea id="message" name="message" rows="4" required></textarea>
+                        <span class="error-message" data-error="message"></span>
+                    </div>
+                    <button type="submit" class="btn">Send Message</button>
+                </form>
+
+                <div class="contact-info">
+                    <img src="../img/logo.png" alt="Logo" class="contact-logo">
+                    <h3>Let's Connect!</h3>
+                    <p>Feel free to connect with me through my social media accounts.</p>
+                    <div class="social-links">
+                        <a href="https://facebook.com/yourprofile" target="_blank" aria-label="Facebook">
+                            <img src="../img/facebook.png" alt="Facebook">
+                        </a>
+                        <a href="https://instagram.com/yourprofile" target="_blank" aria-label="Instagram">
+                            <img src="../img/instagram.png" alt="Instagram">
+                        </a>
+                        <a href="https://linkedin.com/in/yourprofile" target="_blank" aria-label="LinkedIn">
+                            <img src="../img/linkedin.png" alt="LinkedIn">
+                        </a>
+                    </div>
+                </div>
+            </div>
+        </section>
     </main>
-    <footer></footer>
+
+    <footer>
+        <p>&copy; 2026 Sonny Jr. Berdin</p>
+    </footer>
+
+    <script src="../../module-05-javascript/starter-files/main.js"></script>
 </body>
 </html>
